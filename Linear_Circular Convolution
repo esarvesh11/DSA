@@ -1,0 +1,48 @@
+clc
+close all;
+x=input('Enter the sequence 1 : ');
+h=input('Enter the sequence 2 : ');
+k=input('for periodic 0 and for non-periodic enter 1 : ') ;
+switch k
+case 0
+T=input('Enter time period : ');
+xpad= [x zeros(1, T-length(x))];
+hpad= [h zeros(1, T-length(h))];
+ypad=ifft(fft(xpad).*fft(hpad));
+subplot(3,1,1);
+stem(x-1,xpad);
+ylabel('Amplitude--->');
+xlabel('N--->');
+title('Input sequence x')
+subplot(3,1,2);
+stem(x-1,hpad);
+ylabel('Amplitude--->');
+xlabel('N--->');
+title('Input sequence h')
+subplot(3,1,3);
+stem(x-1,ypad);
+ylabel('Amplitude--->');
+xlabel('N--->');
+title('cicular Convolution');
+case 1
+a=input('Give index of zero for x : ' );
+b=input('Give index of zero for h : ' );
+y=conv(x,h);
+subplot(3,1,1);
+stem(x-a,x);
+ylabel('Amplitude--->');
+xlabel('N--->');
+title('Input sequence x')
+subplot(3,1,2);
+x2= [1: length(h)];
+stem(x2-b,h);
+ylabel('Amplitude--->');
+xlabel('N--->');
+title('Input sequence h')
+subplot(3,1,3);
+x1=[1:length(h)+length(x)-1];
+stem(x1-(a+b-1),y);
+ylabel('Amplitude--->');
+xlabel('N--->');
+title('linear Convolution');
+end
