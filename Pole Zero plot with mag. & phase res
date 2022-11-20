@@ -1,0 +1,20 @@
+numerator = input("Enter Numerator :");
+denominator = input("Enter Denominator :");
+sys = tf(numerator,denominator);
+[h, w] = freqz(numerator,denominator,'whole'); %Mag Response
+%[phi, wo] = phasez(numerator,denominator,'whole');
+figure(1);              %Mag Response
+plot(-1+w/pi,abs(h));   
+xlabel('w/pi');         
+ylabel('Magnitude');  
+%figure(2)
+%plot(-1+wo/pi,phi);
+%xlabel('w/pi');
+%ylabel('Phase');
+figure(3);              %Pole Zero
+th = 0:pi/50:2*pi;
+xunit = 1 * cos(th);
+yunit = 1 * sin(th);
+h = plot(xunit, yunit);
+hold on;
+pzplot(sys,'b')
