@@ -1,0 +1,59 @@
+% MATLAB code for DFT
+xn=input('Input sequence dft: ');
+N = input('Enter the number of points: ');
+Xk=calcdft(xn,N);
+disp('DFT X(k): ');
+disp(Xk);
+mgXk = abs(Xk);
+%phaseXk = angle(Xk);
+k=0:N-1;
+subplot (2,1,1);
+stem(k,mgXk);
+title ('IDFT sequence: ');
+xlabel('Frequency');
+ylabel('Magnitude');
+%subplot(2,1,2);
+%title('Phase of the DFT sequence');
+%xlabel('Frequency');
+%ylabel('Phase');
+% MATLAB code for IDFT
+Xk = input('Input sequence X(k): ');
+xn=calcidft(Xk);
+N=length(xn);
+disp('xn');
+disp(xn);
+n=0:N-1;
+stem(n,xn);
+title('DFT sequence')
+xlabel('time');
+ylabel('Amplitude');
+
+function [xn] = calcidft(Xk) %function to calculate IDFT
+N=length(Xk);
+for k=0:1:N-1
+for n=0:1:N-1
+p=exp(i*2*pi*n*k/N);
+IT(k+1,n+1)=p;
+end
+end
+disp('Transformation Matrix for IDFT');
+disp(IT);
+xn = (IT*(Xk.'))/N;
+end
+
+function[Xk] = calcdft(xn,N) %function to calculate DFT
+ L=length(xn);
+ if(N<L)
+ error('N must be greater than or equal to L!!')
+ end
+ x1=[xn, zeros(1,N-L)];
+ for k=0:1:N-1
+ for n=0:1:N-1
+ p=exp(-i*2*pi*n*k/N);
+ W(k+1,n+1)=p;
+ end
+ end
+ disp('Transformation matrix for DFT')
+ disp(W);
+ Xk=W*(x1.')
+end
