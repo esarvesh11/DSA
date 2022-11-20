@@ -1,0 +1,10 @@
+numerator = input("Enter Numerator :");
+denominator = input("Enter Denominator :");
+sys = tf(numerator,denominator);
+th = 0:pi/50:2*pi;
+xunit = 1 * cos(th);
+yunit = 1 * sin(th);
+h = plot(xunit, yunit);
+hold on;
+
+pzplot(sys)
