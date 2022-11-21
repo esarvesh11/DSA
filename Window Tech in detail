@@ -1,0 +1,93 @@
+clc;
+close all;
+clear all;
+N=input("Enter the number of samples (N):");
+win=input("Enter the values to choose appropriate window. 1: Rectangular, 2:Hanning, 3: 
+Hamming, 4: Blackman ");
+frtyp=input("Enter the values to choose appropriate window - 1: Highpass filter, 2:Lowpass filter, 
+3: Bandpass filter, 4: Bandstop filter");
+if(win==1)
+if(frtyp==1)
+b =input("Enter the coefficient of cutoff frequency(Excluding pi):");
+c = fir1((N-1),b,"High",rectwin(N));
+end
+if(frtyp==2)
+b =input("Enter the coefficient of cutoff frequency(Excluding pi):");
+c = fir1((N-1),b,"low",rectwin(N));
+end
+if(frtyp==3)
+b =input("Enter the 2 coefficient of cutoff frequency(Excluding pi):");
+c = fir1((N-1),b,"bandpass",rectwin(N));
+end
+if(frtyp==4)
+b =input("Enter the 2 coefficient of cutoff frequency(Excluding pi):");
+c = fir1((N-1),b,"stop",rectwin(N));
+end
+end
+if(win==2)
+if(frtyp==1)
+b =input("Enter the coefficient of cutoff frequency(Excluding pi):");
+c = fir1((N-1),b,"High",hann(N));
+end
+if(frtyp==2)
+b =input("Enter the coefficient of cutoff frequency(Excluding pi):");
+c = fir1((N-1),b,"low",hann(N));
+end
+if(frtyp==3)
+b =input("Enter the 2 coefficient of cutoff frequency(Excluding pi):");
+c = fir1((N-1),b,"bandpass",hann(N));
+end
+if(frtyp==4)
+b =input("Enter the 2 coefficient of cutoff frequency(Excluding pi):");
+c = fir1((N-1),b,"stop",hann(N));
+end
+end
+if(win==3)
+if(frtyp==1)
+b =input("Enter the coefficient of cutoff frequency(Excluding pi):");
+c = fir1((N-1),b,"High",hamming(N));
+end
+if(frtyp==2)
+b =input("Enter the coefficient of cutoff frequency(Excluding pi):");
+c = fir1((N-1),b,"low",hamming(N));
+end
+if(frtyp==3)
+b =input("Enter the 2 coefficient of cutoff frequency(Excluding pi):");
+c = fir1((N-1),b,"bandpass",hamming(N));
+end
+if(frtyp==4)
+b =input("Enter the 2 coefficient of cutoff frequency(Excluding pi):");
+c = fir1((N-1),b,"stop",hamming(N));
+end
+end
+if(win==4)
+if(frtyp==1)
+b =input("Enter the coefficient of cutoff frequency(Excluding pi):");
+c = fir1((N-1),b,"High",blackman(N));
+end
+if(frtyp==2)
+b =input("Enter the coefficient of cutoff frequency(Excluding pi):");
+c = fir1((N-1),b,"low",blackman(N));
+end
+if(frtyp==3)
+b =input("Enter the 2 coefficient of cutoff frequency(Excluding pi):");
+c = fir1((N-1),b,"bandpass",blackman(N));
+end
+if(frtyp==4)
+b =input("Enter the 2 coefficient of cutoff frequency(Excluding pi):");
+c = fir1((N-1),b,"stop",blackman(N));
+end
+end
+disp(c);
+w=0:0.01:pi;
+h=freqz(c,1,w);
+figure(1);
+plot(w/pi,20*log10(abs(h)));
+xlabel("Normalised Frequency(\times\pi rad/sample)");
+ylabel("Magnitude");
+grid on;
+figure(2);
+plot(w/pi,angle(h)*180/pi);
+xlabel("Normalised Frequency(\times\pi rad/sample)");
+ylabel("Phase (Degrees)")
+grid on
