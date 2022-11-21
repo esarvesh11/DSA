@@ -1,0 +1,38 @@
+clc;
+close all;
+
+x1=input('Input sequence for DFT: ');
+x2=input('Input sequence for IDFT: ');
+
+y1 = fft(x1);
+y2 = ifft(x2);
+
+disp(x1);
+disp(y1);
+disp(x2);
+disp(y2);
+
+figure(1);
+subplot(211);
+stem(x1);
+grid on;
+ylabel('Amplitude');
+title('Original Signal');
+subplot(212);
+stem(abs(y1));
+grid on;
+ylabel('Amplitude');
+title('DFT of Signal');
+
+figure(2);
+subplot(211);
+stem(abs(x2));
+grid on;
+ylabel('Amplitude');
+title('Original Signal');
+subplot(212);
+stem(y2);
+grid on;
+ylabel('Amplitude');
+title('IDFT of Signal');
+
